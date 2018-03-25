@@ -58,6 +58,8 @@ The process_image() does as follows:
 
 ### Autonomous Navigation and Mapping
 
+You can see the recorded Autonomous Navigation in Robot Movie.mp4
+
 #### 1. Fill in the perception_step() (at the bottom of the perception.py script) and decision_step() (in decision.py) functions in the autonomous mapping scripts such that your rover can navigate and map autonomously. Explain how you did this in your writeup and discuss your results.
 
 The way to autonomous mapping is much like process_image() does:
