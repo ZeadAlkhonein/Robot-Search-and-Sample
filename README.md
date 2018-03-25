@@ -42,7 +42,7 @@ I have run, added and modified functions in the file. My dataset is recorded in 
 
 
 As is shown in the pic below, the obstacle is red and the navigable area is blue.
-![alt text][image1]
+![alt text][map]
 
 
 #### 2.Populate the process_image() function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap. Run process_image() on your test data using the moviepy functions provided to create video output of your result.
