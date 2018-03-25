@@ -38,7 +38,7 @@ You're reading it!
 ### Notebook Analysis
 #### 1. Run the functions provided in the notebook on test images (either data you recorded or the test data provided). Add/modify functions to allow for color selection of obstacles and rock samples.
 
-I have run, added and modified functions in the file. My dataset is recorded in folder ./my_dataset2.
+I have run, added and modified functions in the file. My dataset is recorded in Robot Movie.mp4.
 
 
 As is shown in the pic below, the obstacle is red and the navigable area is blue.
@@ -62,18 +62,16 @@ The process_image() does as follows:
 #### 1. Fill in the perception_step() (at the bottom of the perception.py script) and decision_step() (in decision.py) functions in the autonomous mapping scripts such that your rover can navigate and map autonomously. Explain how you did this in your writeup and discuss your results.
 
 The way to autonomous mapping is much like process_image() does:
-* Select the navigable, obstacle and rock area and their pixels (line 110-112)
-* Convert the pixels into world coordinates. (line 122-130)
-* Plot the coordinates with different color. (line 135-137)
+* Select the navigable, obstacle and rock area and their pixels 
+* Convert the pixels into world coordinates. 
+* Plot the coordinates with different color.
 
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-1.I spent much time on map the navigable and obstacles onto the original map. The function pix_to_world cannot appropriately convert corrdinates and I modified the way to get yaw. Then it works.
+1- i have tried to send command to the rover to go and pick the yellow rocks but my tries have faild. i hope in the future in my own free time will do it by the end of the course.
 
-2.I hope to add the pick function in decision.py but I have no idea how to send the 'pick' command.
-To avoid being stuck, I followed Luqiang's method, adding a new variable to count the stoptime. If the stoptime exceeds a threshold, the rover will rotate clockwise.
+2- also i couldn't upload my dataset on github it says the imgs are too large
 
 
-3.The thesholded image should be displayed in the Roversim program, but I didn't see anything. After setting the Rover.vision_image to be 255 times of binary image, I could see the vision image on the bottom left.
