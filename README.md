@@ -42,14 +42,13 @@ I have run, added and modified functions in the file. My dataset is recorded in 
 
 
 As is shown in the pic below, the obstacle is red and the navigable area is blue.
-![alt text][map]
-
+https://github.com/ZeadAlkhonein/Robot-Search-and-Sample/blob/master/map.png
 
 #### 2.Populate the process_image() function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap. Run process_image() on your test data using the moviepy functions provided to create video output of your result.
 A video is created ./output/test_mapping.mp4
 
 You can see the navigable terrain and obstacles are plot in the worldmap when the rover goes to anywhere.
-![alt text][image2]
+https://github.com/ZeadAlkhonein/Robot-Search-and-Sample/blob/master/map.png
 
 The process_image() does as follows:
 * Use color theshold to detect obstacles, rocks and navigable area. 
