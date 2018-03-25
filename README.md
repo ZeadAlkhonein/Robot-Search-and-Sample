@@ -1,19 +1,5 @@
 
-## Rover Project Test Notebook
-This notebook contains the functions from the lesson and provides the scaffolding you need to test out your mapping methods.  The steps you need to complete in this notebook for the project are the following:
-
-* First just run each of the cells in the notebook, examine the code and the results of each.
-* Run the simulator in "Training Mode" and record some data. Note: the simulator may crash if you try to record a large (longer than a few minutes) dataset, but you don't need a ton of data, just some example images to work with.   
-* Change the data directory path (2 cells below) to be the directory where you saved data
-* Test out the functions provided on your data
-* Write new functions (or modify existing ones) to report and map out detections of obstacles and rock samples (yellow rocks)
-* Populate the `process_image()` function with the appropriate steps/functions to go from a raw image to a worldmap.
-* Run the cell that calls `process_image()` using `moviepy` functions to create video output
-* Once you have mapping working, move on to modifying `perception.py` and `decision.py` to allow your rover to navigate and map in autonomous mode!
-
-**Note: If, at any point, you encounter frozen display windows or other confounding issues, you can always start again with a clean slate by going to the "Kernel" menu above and selecting "Restart & Clear Output".**
-
-**Run the next cell to get code highlighting in the markdown cells.**
+# Notebook Analysis
 
 
 ```python
@@ -42,9 +28,7 @@ imageio.plugins.ffmpeg.download()
 ```
 
 ## Quick Look at the Data
-There's some example data provided in the `test_dataset` folder.  This basic dataset is enough to get you up and running but if you want to hone your methods more carefully you should record some data of your own to sample various scenarios in the simulator.  
-
-Next, read in and display a random image from the `test_dataset` folder
+Read in and display a random image from my folder
 
 
 ```python
@@ -67,13 +51,14 @@ plt.imshow(image)
 
 
 ## Calibration Data
-Read in and display example grid and rock sample calibration images.  You'll use the grid for perspective transform and the rock image for creating a new color selection that identifies these samples of interest. 
+
+Read in and display example grid and rock sample calibration images. You'll use the grid for perspective transform and the rock image for creating a new color selection that identifies these samples of interest.
+
+
 
 
 ```python
-# In the simulator you can toggle on a grid on the ground for calibration
-# You can also toggle on the rock samples with the 0 (zero) key.  
-# Here's an example of the grid and one of the rocks
+
 example_grid = '../calibration_images/example_grid1.jpg'
 
 example_rock = '../calibration_images/example_rock1.jpg'
@@ -153,16 +138,9 @@ plt.imshow(mask,cmap='gray')
 
 
 ## Color Thresholding
-Define the color thresholding function from the lesson and apply it to the warped image
-
-**TODO:** Ultimately, you want your map to not just include navigable terrain but also obstacles and the positions of the rock samples you're searching for.  Modify this function or write a new function that returns the pixel locations of obstacles (areas below the threshold) and rock samples (yellow rocks in calibration images), such that you can map these areas into world coordinates as well.  
-**Hints and Suggestion:** 
-* For obstacles you can just invert your color selection that you used to detect ground pixels, i.e., if you've decided that everything above the threshold is navigable terrain, then everthing below the threshold must be an obstacle!
+Define the color thresholding function from the lesson and apply it to the warped image.
 
 
-* For rocks, think about imposing a lower and upper boundary in your color selection to be more specific about choosing colors.  You can investigate the colors of the rocks (the RGB pixel values) in an interactive matplotlib window to get a feel for the appropriate threshold range (keep in mind you may want different ranges for each of R, G and B!).  Feel free to get creative and even bring in functions from other libraries.  Here's an example of [color selection](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_colorspaces/py_colorspaces.html) using OpenCV.  
-
-* **Beware However:** if you start manipulating images with OpenCV, keep in mind that it defaults to `BGR` instead of `RGB` color space when reading/writing images, so things can get confusing.
 
 
 ```python
@@ -198,17 +176,10 @@ plt.imshow(threshed, cmap='gray')
 ![png](output_10_1.png)
 
 
+# Here I have a new function to identify yellow rocks i have used opencv library 
+
 
 ```python
-#threashed_rock = color_thresh(rock_img,(60,255,255))
-#bgr = cv2.cvtColor(rock_img, cv2.COLOR_RGB2BGR)
-#hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
-#lower_yellow = np.array([20,100,100])
-#upper_yellow = np.array([40,255,255])
-#mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
-
-#plt.imshow(mask,cmap='gray')
-
 def id_yellow_rock(rock_img):
     bgr = cv2.cvtColor(rock_img, cv2.COLOR_RGB2BGR)
     hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
@@ -216,8 +187,6 @@ def id_yellow_rock(rock_img):
     upper_yellow = np.array([40,255,255])
     mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
     return mask
-
-
 ```
 
 ## Coordinate Transformations
@@ -315,7 +284,7 @@ plt.arrow(0, 0, x_arrow, y_arrow, color='red', zorder=2, head_width=10, width=2)
 
 
 
-![png](output_13_1.png)
+![png](output_14_1.png)
 
 
 ## Read in saved data and ground truth map of the world
