@@ -34,7 +34,7 @@ def decision_step(Rover):
                     Rover.brake = Rover.brake_set
                     Rover.steer = 0
                     Rover.mode = 'stop'
-                    
+             # i have added this line to check if the rover is near a rock if it's added on the samples located counter
             elif Rover.near_sample == 1:
                     Rover.samples_located +=1                     
 
