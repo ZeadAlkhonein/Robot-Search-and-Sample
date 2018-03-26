@@ -75,14 +75,51 @@ You can see the navigable terrain and obstacles are plot in the worldmap when th
 https://github.com/ZeadAlkhonein/Robot-Search-and-Sample/blob/master/map.png
 
 The process_image() does as follows:
-* Use color theshold to detect obstacles, rocks and navigable area. 
-* Convert there pictures into rover-centric and then into world coordinates. 
-* Plot obstacles, rocks and navigable area on worldmap, in red, blue, green seperately. 
 
+1. Apply perspective tansform on images
+```
+warped, mask = perspect_transform(img, source, destination)
+```
+2. With the transformed image perform thresholding for objects of interest: navigable path, obstacles and rocks
+the functions are :
+```
+threshed = color_thresh(warped)
+#see if we find some rock
+rock_map = id_yellow_rock(warped)
+
+```
+3. Once we have the threshold values we convert these to rover coordinates
+```
+    xpix, ypix = rover_coords(threshed)
+```
+4. Rover coordinates are then converted to world map coordinates for mapping
+```
+    xpos = data.xpos[data.count]
+    ypos = data.ypos[data.count]
+    yaw = data.yaw[data.count]
+    world_size = data.worldmap.shape[0]
+    scale = 2 * dst_size
+    x_world, y_world = pix_to_world(xpix,ypix,xpos,ypos,yaw,world_size, scale)
+```
+5. Obstacles = RED, Navigable path = blue white = rocks
+
+```
+    data.worldmap[y_world, x_world, 2] = 255
+    data.worldmap[obs_y_world, obs_x_world, 0] = 255
+    data.worldmap[rock_y_world, rock_x_world, :] = 255
+```
 
 ### Autonomous Navigation and Mapping
 
 You can see the recorded Autonomous Navigation in Robot Movie.mp4
+
+
+the logic here same as python notebook key things are diffrent is we had to consider that we take image live and it's changing by the second i needed to take rover postion live with every image we take.
+Key things needed were a thresholded image of the path, obstacles, and rocks.
+we pass these to rover to make it aware of it surroundings. 
+we also need to take rover coordinates to make it make decision on where to go and which route is the best
+
+
 also all the comments on the code.
 
 ```
