@@ -193,6 +193,9 @@ def perception_step(Rover):
 
 ```
 
+if the rover sees navigable terrian it will make forward, if it saw obsticale terrian the rover will make 180 and make forward to the navigable terrian. 
+if the rover saw rocks the sample counter will ++ 
+
 also all the comments on the code. 
 
 ```
